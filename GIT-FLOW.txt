@@ -1,0 +1,390 @@
+GIT FLOW
+#ADMIN
+1. ADMIN BUAT REPO BARU
+----4 DARI KONTRIBUTOR
+2. ADMIN LIHAT PERUBAHAN YANG DI LAKUKAN OLEH KONTRIBUTOR
+>>$ git remote add atjep https://github.com/arrahmatcenter/git-flow.git (yang atjep rubah jadi erick)
+>>$ git remote -v
+atjep   https://github.com/arrahmatcenter/git-flow.git (fetch)
+atjep   https://github.com/arrahmatcenter/git-flow.git (push)
+origin  https://github.com/atjeprahmat/git-flow.git (fetch)
+origin  https://github.com/atjeprahmat/git-flow.git (push)
+
+3. BUAT BRANCH
+>>$ git branch cek-kontributor
+4. CEK BRANCH
+>>$ git branch
+  cek-kontributor
+* master
+* menandakan branch yang sedang aktif dan digunakan]
+4. MEMINDAHKAN BRANCH
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git branch
+  cek-kontributor
+* master
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git checkout cek-kontributor
+Switched to branch 'cek-kontributor' --pindah ke branch cek-kontributor
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (cek-kontributor)
+$ git checkout master
+Switched to branch 'master'  --pindah ke branch master
+
+5. LAKUKAN PULL DARI REPO KONTRIBUTOR, PASTIKAN BRANCH YANG DIGUNAKAN ADALAH YANG cek-kontributor
+>>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (cek-kontributor)
+$ git pull atjep master (atjep ganti pake erick)
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/arrahmatcenter/git-flow
+ * branch            master     -> FETCH_HEAD
+ * [new branch]      master     -> atjep/master
+Updating c4a134a..b14e55d
+Fast-forward
+ dokumen.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+--KITA BEDAKAN KETIKA KITA MENGGUNAKAN BRANCH cek-kontributor ISINYA AKAN SAMA DENGAN KONTRIBUTOR
+TAPI KETIKA KITA MENGGUNAKAN BRANCH master MAKA BELUM ADA PERUBAHAN YANG TERJADI DI MASTER, BUKTIKAN
+>>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git checkout cek-kontributor
+Switched to branch 'cek-kontributor'
+
+6. ADMIN MEMINTA SI KONTRIBUTOR UNTUK MENAMBAHKAN PERUBAHAN, LAKUKAN PERUBAHAN PADA LOKALNYA SI KONTRIBUTOR YA
+Pertama kontrib nambahin teks ini,
+lalu di push ke reponya dia yang udah d fork dari atjeprahmat...
+----
+perubahan ini setelah di cek oleh admin ya,
+tadi ngerubah rubah brach kan,
+--
+sekarang ini tambahan dari admin supaya si kontributor nambahin apa yang di minta
+
+7. OKE SEKRANG LAKUKAN PULL LAGI UNTUK MELIHAT PERUBAHAN DARI KONTRIBUTOR, JANGAN LUPA PASTIKAN BRANCHNYA YANG cek-kontributor YA..
+>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git pull atjep master
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/arrahmatcenter/git-flow
+ * branch            master     -> FETCH_HEAD
+   b14e55d..9a0b409  master     -> atjep/master
+Updating c4a134a..9a0b409
+Fast-forward
+ dokumen.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+LIHAT PERUBAHAN YANG TERJADI PADA REPO LOKALNYA SI ADMIN, BERUBAH KHAAAN..
+
+SEKARANG KITA BALIK LAGI KE BRANCH MASTER, SEKARANG KITA LAKUKAN MERGE DARI .... 
+LAKUKAN MERGE DENGAN cek-kontributor TADI
+>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (cek-kontributor)
+$ git checkout master
+Switched to branch 'master'
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git merge cek-kontributor
+Already up to date.
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git checkout master
+Already on 'master'
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git push origin master
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 648 bytes | 108.00 KiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+To https://github.com/atjeprahmat/git-flow.git
+   c4a134a..9a0b409  master -> master
+
+LALU CEK HASIL PUSH YANG DITUJUKAN KE REPONYA SI MASTER
+OTOMATIS REPO SIMASTER JADI 3 COMMIT YA SAMA DENGAN KONTRIBUTOR,
+
+AWAL SAAT JUMLAH COMMIT YANG DI KONTRIBUTOR 3 TAPI DI ADMIN MASIH 1 ADA KETERANGAN
+This branch is 2 commits ahead of atjeprahmat:master (INI MENANDAKAN KONTRIBUTOR BEDA DENGAN ADMIN)
+TAPI SETELAH DI ADMIN DAN DI KONTRIBUTOR JADI SAMA SAMA 3, MAKA ADA KETERANGAN
+This branch is even with atjeprahmat:master. (INI MENANDAKAN KONTRIBUTOR SAMA DENGAN ADMIN)
+
+SEKARANG KEMBALI LAGI KE KONTRIBUTOR YAAA, KITA AKAN MELAKUKAN FASILITAS GITHUB DENGAN TOMBOL PULL REQUEST
+
+SETELAH MENDAPAT PULL REQUEST DAN ADMIN CEK REQUEST DARI KONTRIBUTOR, SAATNYA SEKARANG EKSESKUSI...
+HAPUS DLU BRANCH YANG TADI YA ATAU GPP KALO GK D HAPUS JG..
+PASTIKAN BERADA DI BRANCH MASTER YA..
+SEKARANG KITA CEK APA SIH YANG DI REQUEST DARI KONTRIBUTOR
+TAMBAH BARU DLU BRANCH YA SESUAI DENGAN NAMANYA YANG TADI YA
+>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git branch push-tombol-pull-request
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$
+
+LALU CHECKOUT PINDAHKAN KE BRANCH push-tombol-pull-request
+>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git checkout push-tombol-pull-request
+Switched to branch 'push-tombol-pull-request'
+
+LAKUKAN PULL 
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git pull atjep master
+From https://github.com/arrahmatcenter/git-flow
+ * branch            master     -> FETCH_HEAD
+Updating 9a0b409..d7fecd3
+Fast-forward
+ dokumen.txt | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git merge push-tombol-pull-request
+Already up to date.
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git push origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 401 bytes | 133.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/atjeprahmat/git-flow.git
+   9a0b409..d7fecd3  master -> master
+
+PULL REQUEST KE 2 (dokumen2)
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git branch
+  cek-kontributor
+* master
+  push-tombol-pull-request
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+	
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git branch push-dokumen2
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git branch
+  cek-kontributor
+* master
+  push-dokumen2
+  push-tombol-pull-request
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$
+
+SETELAH KONTRIBUTOR MELAKUKAN PULL REQUEST
+SEKARANG ADMIN MELAKUKAN PULL
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (push-dokumen2)
+$ git checkout master
+Switched to branch 'master'
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git pull atjep master
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), done.
+From https://github.com/arrahmatcenter/git-flow
+ * branch            master     -> FETCH_HEAD
+   d7fecd3..b15adff  master     -> atjep/master
+Updating d7fecd3..b15adff
+Fast-forward
+ dokumen2.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 dokumen2.txt
+
+HASILNYA ADALAH REPO LOKAL DARI ADMIN SEKARANG ADA 2 DOKUMEN YA, INI HASIL DARI PULL DI ATAS
+JUGA DI REPO LOKAL KONTRIBUTOR ADA 2 DOKUMEN, DI REPO ADMIN JUGA ADA 2 DOKUMEN
+TAPI SAAT KITA PINDAHKAN BRACHNYA KE SELAIN MASTER DI ADMIN, MAKA dokumen2 TIDAK MUNCUL
+>atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git checkout push-dokumen2
+Switched to branch 'push-dokumen2'
+
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (push-dokumen2)
+$ git checkout master
+Switched to branch 'master'
+
+OKE SEKARANG KITA LAKUKAN PUSH DARI ADMIN KE REPO ADMIN YA...
+TAPI SEBELUM KITA NGEPUSH KE REPO ADMIN, COBA PASTIKAN DULU YA DI REPO KONTRIBUTOR PASTIKAN ADA : 5 COMMIT, 2 DOKUMEN, 1 BRANCH
+DI REPO ADMIN PASTIKAN ADA 4 COMMIT, 1 DOKUMEN
+
+This branch is 1 commit ahead of atjeprahmat:master. (DI REPO KONTRIBUTOR ADA KETERANGAN INI YA)
+
+OK SAMA YA, SEKARANG KITA AKAN PUSH DARI ADMIN KE REPO ADMIN 
+atjep@DESKTOP-JQ15HRV MINGW64 /d/git-flow (master)
+$ git push origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 296 bytes | 148.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/atjeprahmat/git-flow.git
+   d7fecd3..b15adff  master -> master
+
+OKE BERHASIL YA, SEKARANG CEK DAN PASTIKAN DI KONTRIBUTOR MAUPUN DI ADMIN ADA : 5 COMMIT DAN 2 DOKUMEN.
+
+
+----------------------------------------------------------------------------------------------------
+
+
+
+#KONTRIBUTOR
+1. FORK DARI ADMIN
+2. CLONE DARI FORK YANG TADI DARI ADMIN
+3. LAKUKAN PERUBAHAN PADA DOKUMEN
+4. LALUKAN PUSH LAGI KE REPO HASIL FORK
+>>$ git remote add kontri https://github.com/arrahmatcenter/git-flow.git
+5. LAKUKAN PENGECEKAN STATUS, LALU PUSH LAGI KE KONTRIBUTOR
+>atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   dokumen.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git add *
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git commit -m "push2"
+[master 9a0b409] push2
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 419 bytes | 209.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/arrahmatcenter/git-flow.git
+   b14e55d..9a0b409  master -> master
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$
+
+CEK LAGI KE HALAMAN WEBNYA KONTRIBUTOR PERHATIKAN JUMLAH COMMIT
+HARUSNYA SUDAH JADI 3 YA, OKE LETS CEK THIS OUT ... :)
+
+JUMLAH COMMITNYA JADI 3 YA, KETERANGAN PUSHNY JADI "push2"
+
+------
+6. NAAAH SEKARANG KITA AKAN COBA MENGGUNAKAN TOMBOL PULL REQUEST YUPS,
+LAKUKAN PERUBAHAN PADA FILE KONTRIBUTOR LALU PUSH LAGI
+>atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   dokumen.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git add *
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git commit -m "push-tombol pull request"
+[master d7fecd3] push-tombol pull request
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git push origin master
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 401 bytes | 401.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/arrahmatcenter/git-flow.git
+   9a0b409..d7fecd3  master -> master
+--
+ Pull request Compare This branch is 1 commit ahead of atjeprahmat:master. 
+--
+ Able to merge. These branches can be automatically merged. 
+--
+KLIK PULL REQUEST, LALU ISI FORMNYA, KLIK PULL REQUEST
+MAKA DI ADMIN ADA KETERANGAN PERMINTAAN REQUEST
+
+SEKARANG KITA KE ADMIN YA
+
+--- 
+TAMBAH DOKUMEN BARU LALU PUSH YA
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+        dokumen2.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git add *
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git commit -m "push-dokumen2"
+[master b15adff] push-dokumen2
+ 1 file changed, 1 insertion(+)
+ create mode 100644 dokumen2.txt
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git remote add https://github.com/arrahmatcenter/git-flow.git
+usage: git remote add [<options>] <name> <url>
+
+    -f, --fetch           fetch the remote branches
+    --tags                import all tags and associated objects when fetching
+                          or do not fetch any tag at all (--no-tags)
+    -t, --track <branch>  branch(es) to track
+    -m, --master <branch>
+                          master branch
+    --mirror[=(push|fetch)]
+                          set up remote as a mirror to push to or fetch from
+
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git remote add origin https://github.com/arrahmatcenter/git-flow.git
+fatal: remote origin already exists.
+
+atjep@DESKTOP-JQ15HRV MINGW64 ~/Downloads/git-flow (master)
+$ git push origin master
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 296 bytes | 296.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/arrahmatcenter/git-flow.git
+   d7fecd3..b15adff  master -> master
+--
+SETELAH ITU MITA PULL REQUEST
+BALIK LAGI KE ADMIN UNTUK NGECEK YA...
